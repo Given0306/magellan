@@ -4,11 +4,11 @@ version := "1.0.5"
 
 organization := "harsha2010"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.7"
 
-crossScalaVersions := Seq("2.11.8")
+crossScalaVersions := Seq("2.12.7")
 
-sparkVersion := "2.2.0"
+sparkVersion := "3.3.1"
 
 val testSparkVersion = settingKey[String]("The version of Spark to test against.")
 
@@ -16,15 +16,15 @@ testSparkVersion := sys.props.get("spark.testVersion").getOrElse(sparkVersion.va
 
 val testHadoopVersion = settingKey[String]("The version of Hadoop to test against.")
 
-testHadoopVersion := sys.props.getOrElse("hadoop.testVersion", "2.7.3")
+testHadoopVersion := sys.props.getOrElse("hadoop.testVersion", "3.3.4")
 
 sparkComponents := Seq("core", "sql")
 
 libraryDependencies ++= Seq(
   "commons-io" % "commons-io" % "2.4",
   "org.slf4j" % "slf4j-api" % "1.7.16" % "provided",
-  "com.lihaoyi" % "fastparse_2.11" % "0.4.3" % "provided",
-  "org.scalatest" %% "scalatest" % "2.2.1" % "test",
+  "com.lihaoyi" % "fastparse_2.12" % "0.4.3" % "provided",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "com.vividsolutions" % "jts" % "1.13" % "test",
   "com.esri.geometry" % "esri-geometry-api" % "1.2.1" % "test"
 )
@@ -80,7 +80,7 @@ spName := "harsha2010/magellan"
 parallelExecution in Test := false
 
 ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
-  if (scalaBinaryVersion.value == "2.10") false
+  if (scalaBinaryVersion.value == "2.12") false
   else true
 }
 
