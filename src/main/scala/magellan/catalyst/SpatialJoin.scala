@@ -40,8 +40,8 @@ private[magellan] case class SpatialJoin(session: SparkSession)
         child
       case p @ Join(
             Generate(Inline(_: Indexer), _, _, _, _, _),
-            Generate(Inline(_: Indexer), _, _, _, _, _), _, _) => p
-      case p @ Join(l, r, Inner, Some(cond @ Within(a, b))) =>
+            Generate(Inline(_: Indexer), _, _, _, _, _), _, _, _) => p
+      case p @ Join(l, r, Inner, Some(cond @ Within(a, b)), _) =>
 
         /**
           * Given a Logical Query Plan of the form
@@ -92,10 +92,11 @@ private[magellan] case class SpatialJoin(session: SparkSession)
           .fold[Expression](Indexer(rightProjection, precision))(identity)
 
         val join = Join(
-          Generate(Inline(leftIndexer), true, false, None, Seq(c1, r1), l),
-          Generate(Inline(rightIndexer), true, false, None, Seq(c2, r2), r),
+          Generate(Inline(leftIndexer), Nil, false, None, Seq(c1, r1), l),
+          Generate(Inline(rightIndexer), Nil, false, None, Seq(c2, r2), r),
           Inner,
-          Some(And(EqualTo(c1, c2), transformedCondition)))
+          Some(And(EqualTo(c1, c2), transformedCondition)),
+          JoinHint.NONE)
 
         Project(p.outputSet.toSeq, join)
     }
