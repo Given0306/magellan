@@ -79,7 +79,8 @@ spName := "harsha2010/magellan"
 
 parallelExecution in Test := false
 
-ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
+//sbt-coverage 插件提供了 coverageHighlighting 选项。当启用此选项时，sbt-coverage 会根据代码覆盖率高亮显示源代码
+coverageHighlighting := {
   if (scalaBinaryVersion.value == "2.12") false
   else true
 }
