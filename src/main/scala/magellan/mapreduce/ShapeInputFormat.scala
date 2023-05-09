@@ -47,7 +47,7 @@ private[magellan] class ShapeInputFormat
        job: JobContext,
        splitInfos: scala.collection.Map[String, Array[Long]]) = {
 
-    val sw = new Stopwatch().start
+    val sw =  Stopwatch.createStarted()
     val splits = ListBuffer[InputSplit]()
     val files = listStatus(job)
     for (file <- files) {
