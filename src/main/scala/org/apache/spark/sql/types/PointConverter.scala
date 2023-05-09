@@ -44,5 +44,6 @@ case class PointConverter(override val left: Expression,
     defineCodeGen(ctx, ev, (c1, c2) => s"pointUDT.serialize($c1, $c2)")
   }
 
-  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression = ???
+  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression =
+    copy(left = newLeft, right = newRight)
 }

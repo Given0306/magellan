@@ -118,7 +118,8 @@ case class Intersects(left: Expression, right: Expression)
     })
   }
 
-  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression = ???
+  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression =
+    copy(left = newLeft, right = newRight)
 }
 
 /**
