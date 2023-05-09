@@ -40,7 +40,7 @@ case class PointConverter(override val left: Expression,
   }
 
   override protected def doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode = {
-    ctx.addMutableState(classOf[PointUDT].getName, "pointUDT", "pointUDT = new org.apache.spark.sql.types.PointUDT();")
+    ctx.addMutableState(classOf[PointUDT].getName, "pointUDT", pointUDT => "pointUDT = new org.apache.spark.sql.types.PointUDT();")
     defineCodeGen(ctx, ev, (c1, c2) => s"pointUDT.serialize($c1, $c2)")
   }
 }

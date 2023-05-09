@@ -27,8 +27,8 @@ case class WKT(override val child: Expression)
   override protected def doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode = {
     val serializersVar = ctx.freshName("serializers")
 
-    ctx.addMutableState(classOf[java.util.HashMap[Integer, UserDefinedType[Shape]]].getName, s"$serializersVar",
-      s"$serializersVar = new java.util.HashMap<Integer, org.apache.spark.sql.types.UserDefinedType<magellan.Shape>>() ;" +
+    ctx.addMutableState(classOf[java.util.HashMap[Integer, UserDefinedType[Shape]]].getName, "serializers",
+      serializersVar => s"$serializersVar = new java.util.HashMap<Integer, org.apache.spark.sql.types.UserDefinedType<magellan.Shape>>() ;" +
         s"$serializersVar.put(1, new org.apache.spark.sql.types.PointUDT());" +
         s"$serializersVar.put(2, new org.apache.spark.sql.types.LineUDT());" +
         s"$serializersVar.put(3, new org.apache.spark.sql.types.PolyLineUDT());" +
