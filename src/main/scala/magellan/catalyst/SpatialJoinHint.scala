@@ -27,5 +27,12 @@ case class SpatialJoinHint(child: LogicalPlan, hints: Map[String, String])
 
   override def output: Seq[Attribute] = child.output
 
-  override lazy val canonicalized: LogicalPlan = SpatialJoinHint(child, hints)
+  //spark升级成员变量修饰符变化导致的问题
+  //参考https://github.com/apache/spark/commit/d28d5732ae205771f1f443b15b10e64dcffb5ff0
+  override def doCanonicalize(): LogicalPlan = SpatialJoinHint(child, hints)
+
+  //spark升级新增接口导致的问题
+  //https://github.com/apache/spark/commit/0945baf90660a101ae0f86a39d4c91ca74ae5ee3
+  override protected def withNewChildInternal(newChild: LogicalPlan): LogicalPlan =
+    copy(child = newChild)
 }

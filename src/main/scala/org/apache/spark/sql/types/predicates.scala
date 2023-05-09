@@ -117,6 +117,8 @@ case class Intersects(left: Expression, right: Expression)
         s"${ev.value} = intersects;"
     })
   }
+
+  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression = ???
 }
 
 /**
@@ -209,5 +211,8 @@ case class Within(left: Expression, right: Expression)
       })
 
   }
+
+  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression =
+    copy(left = newLeft, right = newRight)
 }
 

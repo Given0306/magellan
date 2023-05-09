@@ -68,4 +68,6 @@ case class WKT(override val child: Expression)
       StructField("polygon", new PolygonUDT(), true)))
   }
 
+  override protected def withNewChildInternal(newChild: Expression): Expression =
+    copy(child = newChild)
 }

@@ -43,4 +43,6 @@ case class PointConverter(override val left: Expression,
     ctx.addMutableState(classOf[PointUDT].getName, "pointUDT", pointUDT => "pointUDT = new org.apache.spark.sql.types.PointUDT();")
     defineCodeGen(ctx, ev, (c1, c2) => s"pointUDT.serialize($c1, $c2)")
   }
+
+  override protected def withNewChildrenInternal(newLeft: Expression, newRight: Expression): Expression = ???
 }

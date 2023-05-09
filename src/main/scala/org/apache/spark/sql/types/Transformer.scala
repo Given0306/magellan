@@ -69,4 +69,6 @@ case class Transformer(
     })
   }
 
+  override protected def withNewChildInternal(newChild: Expression): Expression =
+    copy(child = newChild)
 }

@@ -106,6 +106,9 @@ case class Indexer(
         s"${ev.value} = new org.apache.spark.sql.catalyst.util.GenericArrayData($resultsVar); \n"
     })
   }
+
+  override protected def withNewChildInternal(newChild: Expression): Expression =
+    copy(child = newChild)
 }
 
 object Indexer {
