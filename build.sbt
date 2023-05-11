@@ -1,12 +1,17 @@
 name := "magellan"
 
-version := "1.0.5"
+version := "1.0.5-sm-s_2.12"
 
 organization := "harsha2010"
 
 scalaVersion := "2.12.7"
 
 crossScalaVersions := Seq("2.12.7")
+
+
+artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
+  artifact.name + "-1.0.5-sm-s_2.12." + artifact.extension
+}
 
 sparkVersion := "3.3.1"
 
